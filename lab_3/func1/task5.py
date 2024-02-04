@@ -1,0 +1,2 @@
+def allPermutations(str):
+    pass
