@@ -1,8 +1,3 @@
-"""
-Snake Eater
-Made with PyGame
-"""
-
 import pygame, sys, time, random
 
 difficulty = 10
@@ -46,6 +41,7 @@ direction = "RIGHT"
 change_to = direction
 
 score = 0
+level = 1
 
 
 # Game Over
@@ -76,8 +72,23 @@ def show_score(choice, color, font, size):
     # pygame.display.flip()
 
 
+def show_level(choice, color, font, size):
+    level_font = pygame.font.SysFont(font, size)
+    level_surface = level_font.render("Level : " + str(level), True, color)
+    level_rect = level_surface.get_rect()
+    if choice == 1:
+        level_rect.midtop = (frame_size_x / 10, 40)
+    else:
+        level_rect.midtop = (frame_size_x / 2, frame_size_y / 2)
+    game_window.blit(level_surface, level_rect)
+
+
 # Main logic
 while True:
+    if score >= level * 5:
+        level += 1
+        difficulty += 5
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -156,6 +167,7 @@ while True:
             game_over()
 
     show_score(1, white, "consolas", 20)
+    show_level(1, white, "consolas", 20)
     # Refresh game screen
     pygame.display.update()
     # Refresh rate
