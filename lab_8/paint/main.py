@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 # Constants for the application
-FPS = 120
+FPS = 60
 WIDTH, HEIGHT = 800, 600
 MENU_HEIGHT = 70
 BRUSH_SIZE = 20
