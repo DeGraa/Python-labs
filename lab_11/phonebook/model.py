@@ -117,12 +117,12 @@ class Database:
             conn.rollback()
             print(f"Error importing contacts: {error}")
 
-    def get_some_contacts(self, num):
-        sql = "SELECT username, phone_number FROM contacts ORDER BY username LIMIT %s"
+    def get_some_contacts(self, limit, offset):
+        sql = "SELECT username, phone_number FROM contacts LIMIT %s OFFSET %s"
         try:
             with psycopg2.connect(**self.config) as conn:
                 with conn.cursor() as cur:
-                    cur.execute(sql, (num,))
+                    cur.execute(sql, (limit, offset))
                     return cur.fetchall()
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)

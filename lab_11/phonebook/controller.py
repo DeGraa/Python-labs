@@ -81,9 +81,10 @@ class Controller:
             self.view.display_error(f"Error processing contacts: {e}")
 
     def show_some_contacts(self):
-        user_input = self.view.get_input("Enter the number of contacts: ")
+        limit = self.view.get_input("Enter the number of contacts: ")
+        offset = self.view.get_input("Enter the entry index: ")
         try:
-            contacts = self.model.get_some_contacts(user_input)
+            contacts = self.model.get_some_contacts(limit, offset)
             self.view.display_contacts(contacts)
         except Exception as e:
             self.view.display_error(f"Error when displaying contacts: {e}")
