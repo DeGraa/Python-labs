@@ -80,6 +80,16 @@ def show_level(choice, color, font, size):
     game_window.blit(level_surface, level_rect)
 
 
+def display_pause_menu():
+    menu_font = pygame.font.SysFont("consolas", 30)
+    save_text = menu_font.render("Save score and quit (S)", True, (255, 255, 255))
+    continue_text = menu_font.render("Continue (C)", True, (255, 255, 255))
+
+    game_window.blit(save_text, (120, 200))
+    game_window.blit(continue_text, (120, 250))
+    pygame.display.flip()
+
+
 paused = False
 
 # Main loop
@@ -103,6 +113,10 @@ while True:
                 change_to = "RIGHT"
             if event.key == pygame.K_p:
                 paused = not paused
+                if paused:
+                    display_pause_menu()
+            if event.key == pygame.K_c and paused:
+                paused = False
             if event.key == pygame.K_s and paused:
                 insert_user(username, score, level)
                 pygame.quit()
